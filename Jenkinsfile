@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('Checkout') {
             steps {
-            checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhavya123654/bhavithareddylab3.git']])
+            checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/zmirzaei63/MavenProject-4-Pipeline.git']])
 
             }
         }
@@ -18,14 +18,14 @@ pipeline{
          stage('Build') {
                     steps {
                   
-                    bat "mvn clean package"
+                    bat "mvn clean install"
                     
 
                     }
                 }
          stage('Build docker image') {
                     steps {
-                    bat "docker build -t bhavitha111234/maven:v1 ."
+                    bat "docker build -t zmirzaei/mavenproject4docker:1.3."
 
                     }
                 }
@@ -41,13 +41,13 @@ pipeline{
                 }
         stage('Push docker image') {
                     steps {
-                    bat "docker push bhavitha111234/maven:v1"
+                    bat "docker push zmirzaei63/maven:v1"
 
                     }
                 }
      stage('Running Container') {
                     steps {
-                    bat "docker run -d -p 8081:8080 --name my-maven-container-lab3 bhavitha111234/maven:v1"
+                    bat "docker run -d -p 8081:8080 --name my-maven-container-lab3 zmirzaei63/maven:v1"
 
                     }
                 }
